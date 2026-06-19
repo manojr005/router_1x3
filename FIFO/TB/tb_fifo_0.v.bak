@@ -1,0 +1,98 @@
+module tb_fifo_0();
+
+	reg clk,rst,w_en,r_en,soft_rst,lfd_state;
+	reg [7:0] din;
+	wire [7:0] dout;
+	wire empty,full;
+
+
+fifo_0 f1(clk,rst,w_en,soft_rst,r_en,din,lfd_state,empty,dout,full);
+
+always #5 clk = ~clk;
+
+initial clk =0;
+
+task initilize;
+	begin 
+		{rst,w_en,r_en}=3'b100;
+	end
+endtask
+
+task write(input w,lfd, input [7:0]a);
+	begin
+		//@(negedge clk)
+		//	begin
+				w_en = w;
+				lfd_state = lfd;
+				din = a;
+		//	end
+	end
+	
+endtask
+
+
+
+task read(input r);
+	begin 
+		r_en=r;
+	end
+endtask
+
+task write_read(input w,r,lfd, input[7:0]b);
+	begin 
+	w_en = w;
+	r_en = r;
+	lfd_state = lfd;
+	din = b;
+	end
+endtask
+
+initial 
+begin
+
+	$monitor($time,"we =%b | re =%b | lfd = %b | d_in = %b | d_out = %b | full = %b | empty = %b",w_en,r_en,lfd_state,din,dout,full,empty);
+	initilize;
+	//#10;
+	rst = 0;
+	#10;
+	rst = 1;
+	#10;
+	write(1,1,8'b00001001);
+	//#10;
+	read(1);
+	#10;
+	write(1,0,8'b01001010);
+	//#10;
+	read(1);
+	#10;
+	write(1,0,8'b01111010);
+	//#10;
+	read(1);
+	#10;
+	write(1,0,8'b11111010);
+	//#10;
+	read(1);
+	#10;
+
+// new payload
+
+	write(1,1,8'b00000110);
+	read(1);
+	#10;
+	write(1,0,8'b01010101);
+	read(1);
+	#10;
+	write(1,0,8'b11111111);
+	read(1);
+	#10;
+	
+
+//	write_read(1,1,8'd32);
+//	#10;
+	//write_read(1,1,8'd12);
+	
+	
+end
+
+
+endmodule

@@ -1,0 +1,222 @@
+/*
+module router_fifo_tb();
+
+	reg clock,resetn,write_enb,read_enb,soft_reset,lfd_state;
+	reg [7:0] data_in;
+	wire [7:0] data_out;
+	wire empty,full;
+
+
+router_fifo f1(clock,resetn,write_enb,soft_reset,read_enb,data_in,lfd_state,empty,data_out,full);
+
+always #5 clock = ~clock;
+
+initial clock =0;
+
+task initilize;
+	begin 
+		{resetn,write_enb,read_enb}=3'b100;
+	end
+endtask
+
+task write(input w,lfd, input [7:0]a);
+	begin
+		//@(negedge clock)
+		//	begin
+				write_enb = w;
+				lfd_state = lfd;
+				data_in = a;
+		//	end
+	end
+	
+endtask
+
+
+
+task read(input r);
+	begin 
+		read_enb=r;
+	end
+endtask
+
+
+task write_read(input w,r,lfd, input[7:0]b);
+	begin 
+	write_enb = w;
+	read_enb = r;
+	lfd_state = lfd;
+	data_in = b;
+	end
+endtask
+
+always @(posedge clock)
+begin
+    $display("Time=%0t | r_p=%0d | w_p=%0d | count=%0d | re=%0d |din=%0d |dout=%0d",
+              $time,f1.r_p,f1.w_p,f1.count,read_enb,data_in,data_out);
+end	
+
+initial 
+begin
+
+	//$monitor($time,"we =%b | re =%b | lfd = %b | d_in = %b | d_out = %b | full = %b | empty = %b",write_enb,read_enb,lfd_state,data_in,data_out,full,empty);
+	//$display("r_p = %b | count = %b",f1.r_p,f1.count);
+
+
+initilize;
+	//#10;
+	resetn = 0;
+	#10;
+	resetn = 1;
+//	#10;
+	//soft_reset = 1;
+//	#10;
+	//soft_reset = 0;
+//	#15;
+	write(1,1,8'b00000000);
+	#10;
+	write(1,0,8'b00001001);
+	#10;
+	//read(1);
+	//#10;
+	write(1,0,8'b01001010);
+	//#10;
+	//read(1);
+	#10;
+	write(1,0,8'b01111010);
+	//#10;
+	//read(1);
+	#10;
+	write(1,0,8'b11111010);
+	//#10;
+	//read(1);
+	#10;
+
+// new payload
+
+	write(1,1,8'b00000110);
+	//read(1);
+	#10;
+	write(1,0,8'b01010101);
+	//read(1);
+	#10;
+	write(1,0,8'b11111111);
+	read(1);
+	//#10;
+	
+
+//	write_read(1,1,8'd32);
+//	#10;
+	//write_read(1,1,8'd12);
+	
+	
+end
+
+
+endmodule
+*/
+
+
+module router_fifo_tb;
+    reg clock, resetn, write_en, read_en, lfd_state, soft_reset;
+    reg [7:0] data_in;
+    wire [7:0] data_out;
+    wire empty, full;
+
+    router_fifo f1 (clock, resetn, write_en, soft_reset, read_en, data_in, lfd_state, empty, data_out, full);
+
+    integer i;
+
+    initial clock = 0;
+    always #10 clock = ~clock;
+
+    task initialize;
+        begin
+            write_en   = 1'b0;
+            read_en    = 1'b0;
+            lfd_state  = 1'b0;
+            soft_reset = 1'b0;
+            resetn     = 1'b1;
+            data_in    = 8'd0;
+        end
+    endtask
+
+    task resetnn;
+        begin
+            @(negedge clock) resetn = 1'b0;
+            @(negedge clock) resetn = 1'b1;
+        end
+    endtask
+
+    task soft_rst;
+        begin
+            @(negedge clock) soft_reset = 1'b1;
+            @(negedge clock) soft_reset = 1'b0;
+        end
+    endtask
+
+    task pack_gen;
+        reg [7:0] header, parity, payload;
+        reg [5:0] payload_len;
+        reg [1:0] addr;
+        begin
+            payload_len = 6'd10;
+            addr        = 2'b01;
+            header      = {payload_len, addr};
+
+            // Cycle 1: lfd_state=1, dummy write
+            @(negedge clock) begin
+                lfd_state = 1'b1;
+                write_en = 1'b1;
+                data_in   = 8'd0;
+            end
+
+            // Cycle 2: header write, lfd_state_d=1 this posedge
+            @(negedge clock) begin
+                lfd_state = 1'b0;
+                data_in   = header;
+            end
+
+            // Payload
+            for (i = 0; i < payload_len; i = i + 1) 
+				begin
+                @(negedge clock) 
+					begin
+						payload = {$random} % 256;
+						data_in = payload;
+					end
+            end
+
+            // Parity
+            @(negedge clock)
+				begin
+					parity  = {$random} % 256;
+					data_in = parity;
+				end
+			@(negedge clock) 
+				begin
+					write_en = 1'b0;
+					data_in   = 8'd0;
+				end
+        end
+    endtask
+
+    task read_packet;
+        begin
+            @(negedge clock) read_en = 1'b1;
+            repeat(14) @(negedge clock);
+            @(negedge clock) read_en = 1'b0;
+        end
+    endtask
+
+    initial begin
+        initialize;
+        resetnn;
+        soft_rst;
+        pack_gen;
+        #40;            
+        read_packet;
+        #500;
+        $finish;
+    end
+
+endmodule

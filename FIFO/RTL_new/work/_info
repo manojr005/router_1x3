@@ -1,0 +1,73 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.1
+vfifo_0
+!s110 1781071723
+!i10b 1
+!s100 @Ic>l0HOLQXaz]la2TbT`3
+I7C5QU7n;52Ba:8P42lhIO2
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 dD:/Maven_verilog/verilog/Router project/FIFO/RTL_new
+w1781071340
+8D:/Maven_verilog/verilog/Router project/FIFO/RTL/fifo_0.v
+FD:/Maven_verilog/verilog/Router project/FIFO/RTL/fifo_0.v
+Z2 L0 21
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1781071723.000000
+!s107 D:/Maven_verilog/verilog/Router project/FIFO/RTL/fifo_0.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Maven_verilog/verilog/Router project/FIFO/RTL/fifo_0.v|
+!i113 1
+Z4 o-work work
+Z5 tCvgOpt 0
+vrouter_fifo
+Z6 !s110 1781670075
+!i10b 1
+!s100 mOZb6@DWB@B__QXK=N;P_3
+I5ei=PNbVVbPYbRH2[<CXj1
+R0
+R1
+w1781670066
+8D:\Maven_verilog\verilog\Router project\FIFO\RTL\router_fifo.v
+FD:\Maven_verilog\verilog\Router project\FIFO\RTL\router_fifo.v
+R2
+R3
+r1
+!s85 0
+31
+Z7 !s108 1781670075.000000
+!s107 D:\Maven_verilog\verilog\Router project\FIFO\RTL\router_fifo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:\Maven_verilog\verilog\Router project\FIFO\RTL\router_fifo.v|
+!i113 1
+R4
+R5
+vrouter_fifo_tb
+R6
+!i10b 1
+!s100 cAN1k7ilWM1O@B6hIIKHl3
+I7WN>Ea?@jL?lf]h=3W8Dl3
+R0
+R1
+w1781158772
+8D:/Maven_verilog/verilog/Router project/FIFO/TB/router_fifo_tb.v
+FD:/Maven_verilog/verilog/Router project/FIFO/TB/router_fifo_tb.v
+L0 119
+R3
+r1
+!s85 0
+31
+R7
+!s107 D:/Maven_verilog/verilog/Router project/FIFO/TB/router_fifo_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Maven_verilog/verilog/Router project/FIFO/TB/router_fifo_tb.v|
+!i113 1
+R4
+R5
