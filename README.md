@@ -306,16 +306,7 @@ gtkwave dump.vcd
 
 ---
 
-## Future Improvements
 
-- Configurable number of destination ports
-- Variable packet width
-- CRC-based error detection
-- Round-robin arbitration
-- AXI-Stream interface support
-- Parameterized FIFO depth
-
----
 
 ## Author
 
