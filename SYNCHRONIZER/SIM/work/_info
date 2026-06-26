@@ -1,0 +1,73 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.1
+vrouter_sync
+Z0 !s110 1782490563
+!i10b 1
+!s100 <_C@Em@Zoc<_I?dOA_fJ71
+IzKV__ZHP1`Z7<k`o4Xc2<1
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dD:/Maven_verilog/verilog/Router project/SYNCHRONIZER/SIM
+Z3 w1782066588
+Z4 8D:/Maven_verilog/verilog/Router project/SYNCHRONIZER/RTL/router_sync.v
+Z5 FD:/Maven_verilog/verilog/Router project/SYNCHRONIZER/RTL/router_sync.v
+L0 1
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1782490563.000000
+Z8 !s107 D:/Maven_verilog/verilog/Router project/SYNCHRONIZER/RTL/router_sync.v|
+Z9 !s90 -reportprogress|300|-work|work|-stats=none|D:/Maven_verilog/verilog/Router project/SYNCHRONIZER/RTL/router_sync.v|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vrouter_sync_tb
+R0
+!i10b 1
+!s100 eb11Vm[W1lUm[I7oA6dVm2
+IaL5H20jmgB;?9QUSC^40:2
+R1
+R2
+w1782110287
+8D:/Maven_verilog/verilog/Router project/SYNCHRONIZER/TB/router_sync_tb.v
+FD:/Maven_verilog/verilog/Router project/SYNCHRONIZER/TB/router_sync_tb.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+!s107 D:/Maven_verilog/verilog/Router project/SYNCHRONIZER/TB/router_sync_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Maven_verilog/verilog/Router project/SYNCHRONIZER/TB/router_sync_tb.v|
+!i113 1
+R10
+R11
+vsoft_rst
+R0
+!i10b 1
+!s100 NdMnBWDRC251Sal>D8;ji0
+IXmB:AAfn7RC_mA]kDXf:d3
+R1
+R2
+R3
+R4
+R5
+L0 71
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
