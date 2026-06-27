@@ -251,28 +251,7 @@ The parity byte is transmitted after `pkt_valid` becomes LOW.
 
 ---
 
-## Project Directory
 
-```
-Router_1x3/
-│
-├── rtl/
-│   ├── router_top.v
-│   ├── router_fsm.v
-│   ├── router_fifo.v
-│   ├── router_reg.v
-│   └── router_sync.v
-│
-├── testbench/
-│   └── router_tb.v
-│
-├── docs/
-│   └── router_block_diagram.png
-│
-└── README.md
-```
-
----
 
 ## Simulation
 
