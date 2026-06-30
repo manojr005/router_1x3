@@ -1,0 +1,30 @@
+{D:/Maven_verilog/verilog/Router project/FSM/RTL/router_fsm.v} {1 {vlog -work work -stats=none {D:/Maven_verilog/verilog/Router project/FSM/RTL/router_fsm.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module router_fsm
+
+Top level modules:
+	router_fsm
+
+} {} {}} {D:/Maven_verilog/verilog/Router project/FIFO/RTL/router_fifo.v} {1 {vlog -work work -stats=none {D:/Maven_verilog/verilog/Router project/FIFO/RTL/router_fifo.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module router_fifo
+
+Top level modules:
+	router_fifo
+
+} {} {}} {D:/Maven_verilog/verilog/Router project/REGISTER/RTL/router_register.v} {1 {vlog -work work -stats=none {D:/Maven_verilog/verilog/Router project/REGISTER/RTL/router_register.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module router_register
+
+Top level modules:
+	router_register
+
+} {} {}} {D:/Maven_verilog/verilog/Router project/SYNCHRONIZER/RTL/router_sync.v} {1 {vlog -work work -stats=none {D:/Maven_verilog/verilog/Router project/SYNCHRONIZER/RTL/router_sync.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module router_sync
+-- Compiling module soft_rst
+
+Top level modules:
+	router_sync
+
+} {} {}}
