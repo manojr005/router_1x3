@@ -214,117 +214,62 @@ Each destination has an independent FIFO that supports:
 
 ---
 
-
-
-# Packet Format
-
-
+## Packet Format
 
 Each packet consists of:
 
-
-
 | Field | Size |
-
 |--------|------|
-
 | Header | 1 Byte |
-
 | Payload | 1–63 Bytes |
-
 | Parity | 1 Byte |
-
-
 
 ### Header Format
 
-
-
 | Bits | Description |
-
 |------|-------------|
-
 | [7:2] | Payload Length |
-
 | [1:0] | Destination Address |
 
-
-
-Destination Address Encoding
-
-
+Destination Address Encoding:
 
 | Address | Destination FIFO |
-
 |----------|------------------|
-
 | 00 | FIFO 0 |
-
 | 01 | FIFO 1 |
-
 | 10 | FIFO 2 |
-
 | 11 | Invalid Address |
-
-
 
 ---
 
+## Interface
 
-
-# Interface
-
-
-
-## Inputs
-
-
+### Inputs
 
 | Signal | Width | Description |
-
 |---------|------|-------------|
-
 | clock | 1 | System clock |
-
 | resetn | 1 | Active-low synchronous reset |
-
 | data_in | 8 | Input packet data |
+| pkt_valid | 1 | Indicates valid packet transmission |
+| read_enb_0 | 1 | Read enable for FIFO 0 |
+| read_enb_1 | 1 | Read enable for FIFO 1 |
+| read_enb_2 | 1 | Read enable for FIFO 2 |
 
-| pkt_valid | 1 | Packet transmission indicator |
+---
 
-| read_enb_0 | 1 | FIFO 0 read enable |
-
-| read_enb_1 | 1 | FIFO 1 read enable |
-
-| read_enb_2 | 1 | FIFO 2 read enable |
-
-
-
-## Outputs
-
-
+### Outputs
 
 | Signal | Width | Description |
-
 |---------|------|-------------|
-
-| data_out_0 | 8 | FIFO 0 output |
-
-| data_out_1 | 8 | FIFO 1 output |
-
-| data_out_2 | 8 | FIFO 2 output |
-
-| valid_out_0 | 1 | FIFO 0 contains valid data |
-
-| valid_out_1 | 1 | FIFO 1 contains valid data |
-
-| valid_out_2 | 1 | FIFO 2 contains valid data |
-
-| busy | 1 | Router busy signal |
-
-| error | 1 | Parity error indicator |
-
-
+| data_out_0 | 8 | Data output from FIFO 0 |
+| data_out_1 | 8 | Data output from FIFO 1 |
+| data_out_2 | 8 | Data output from FIFO 2 |
+| valid_out_0 | 1 | FIFO 0 contains valid packet |
+| valid_out_1 | 1 | FIFO 1 contains valid packet |
+| valid_out_2 | 1 | FIFO 2 contains valid packet |
+| busy | 1 | Router busy indication |
+| error | 1 | Parity mismatch detected |
 
 ---
 
