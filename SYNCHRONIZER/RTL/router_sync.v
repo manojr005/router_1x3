@@ -4,31 +4,28 @@ write_enb,fifo_full,empty_0,empty_1,empty_2,soft_reset_0,soft_reset_1,soft_reset
 	input detect_add,write_enb_reg,clock,resetn,read_enb_0;
 	input read_enb_1,read_enb_2,empty_0,empty_1,empty_2,full_0,full_1,full_2 ;
 	input [1:0] data_in;
-	output reg vld_out_0,vld_out_1,vld_out_2,fifo_full;
+	output vld_out_0,vld_out_1,vld_out_2;
+	//wrongly used reg but wire needed to use wire due to assign
 	output reg [2:0]write_enb;
+	output reg fifo_full;
+	// use reg for always here issue faced due to declare as wire
 	output soft_reset_0,soft_reset_1,soft_reset_2;
 
 	reg [1:0]temp; 
 	
 	always@(posedge clock)
 	begin
-		if(!resetn)
-		begin
-			{vld_out_0,vld_out_1,vld_out_2} <= 3'd0;
-			{/*soft_reset_0,soft_reset_1,soft_reset_2,*/fifo_full} <= 4'd0;
-			write_enb = 3'd0;
-			
-		end
-		else
-		begin
+		
+	//	else
+		//begin
 			// address detection and storing it in a temporary memory to avoid confusion between the address and other data based on detect_add high
 			if(detect_add) 
 			begin
-				temp = data_in;
+				temp <= data_in;
 			//else data_in <= data_in;
 			end 
 			else temp <= temp;
-		end
+		//end
 	
 	end
 	 // module for soft reset is instantiated here
@@ -38,31 +35,41 @@ write_enb,fifo_full,empty_0,empty_1,empty_2,soft_reset_0,soft_reset_1,soft_reset
 		soft_rst r3 (vld_out_2,read_enb_2,clock,resetn,soft_reset_2);
 
 	//combinational circuit for the valid out is done
+	assign vld_out_0 = ~empty_0;
+	assign vld_out_1 = ~empty_1;
+	assign vld_out_2 = ~empty_2;
 	
 	always@(*)
 	begin
-		vld_out_0 = ~empty_0;
-		vld_out_1 = ~empty_1;
-		vld_out_2 = ~empty_2;
-	
-	if(write_enb_reg)
+		
+	if(!resetn)
 		begin
-			case(temp)
-				2'b00: write_enb = 3'b001;
-				2'b01: write_enb = 3'b010;
-				2'b10: write_enb = 3'b100;
-				default: write_enb = 3'b000;
-			endcase
-		end  
-	else write_enb = 3'b000;
-				
-				//fifo full condition based on the full signal from the fifo
+		//	{vld_out_0,vld_out_1,vld_out_2} <= 3'd0;
+			fifo_full = 1'd0;
+			write_enb = 3'd0;
+			
+		end
+	else begin
+	
+		if(write_enb_reg)
+			begin
 				case(temp)
-					2'b00: fifo_full = full_0;
-					2'b01: fifo_full = full_1;
-					2'b10: fifo_full = full_2;
-					default: fifo_full = 1'b0;
+					2'b00: write_enb = 3'b001;
+					2'b01: write_enb = 3'b010;
+					2'b10: write_enb = 3'b100;
+					default: write_enb = 3'b000;
 				endcase
+			end  
+		else write_enb = 3'b000;
+					
+					//fifo full condition based on the full signal from the fifo
+		case(temp)
+			2'b00: fifo_full = full_0;
+			2'b01: fifo_full = full_1;
+			2'b10: fifo_full = full_2;
+			default: fifo_full = 1'b0;
+		endcase
+		end
 	end
 endmodule
 
