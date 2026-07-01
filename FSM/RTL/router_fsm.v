@@ -29,7 +29,7 @@ begin
 	if((!resetn )|| (soft_reset_0 || soft_reset_1 || soft_reset_2))
 	begin
 		ps <= decode_address;
-		addr <= 0;
+	//	addr <= 0;
 	end
 	else 
 		ps <= ns;
@@ -38,7 +38,7 @@ end
 
 always@(*)
 begin
-	{detect_add,ld_state,laf_state,full_state,write_enb_reg,rst_int_reg,lfd_state,busy} = 8'd0;
+	{detect_add,ld_state,laf_state,full_state,write_enb_reg,rst_int_reg,lfd_state,busy,addr} = 10'd0;
 	ns = ps;
 	case(ps)
 		decode_address:  begin
@@ -104,7 +104,7 @@ begin
 
 end
 
-assign load = (pkt_valid & (detect_add == 0) & fifo_empty_0 | pkt_valid & (detect_add == 1) & fifo_empty_1 | pkt_valid & (detect_add == 2) & fifo_empty_2);
+assign load = ((pkt_valid & (detect_add == 0) & fifo_empty_0) | (pkt_valid & (detect_add == 1) & fifo_empty_1) | (pkt_valid & (detect_add == 2) & fifo_empty_2));
 assign parity = (!fifo_full && !pkt_valid);
 assign reload = (!parity_done && !low_pkt_valid);
 assign reparity = (!parity_done && low_pkt_valid);
