@@ -22,7 +22,7 @@ module router_top(clock,resetn,read_enb_0,read_enb_1,read_enb_2,data_in,pkt_vali
 	router_fifo fifo2 (clock, resetn, write_enb[1], soft_reset_1, read_enb_1, data_out, lfd_state, empty_1, data_out_1, full_1);
 	router_fifo fifo3 (clock, resetn, write_enb[2], soft_reset_2, read_enb_2, data_out, lfd_state, empty_2, data_out_2, full_2);
 	
-endmodule;
+endmodule
 	
 /******************************************************************************************************************
 	issues faced during the top block instantiation and verification
